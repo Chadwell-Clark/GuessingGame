@@ -20,7 +20,8 @@ void Compare()
     }
     else
     {
-        Console.WriteLine($"Incorrect Guess! You have {4 - counter} guesses left");
+        Hint();
+        Console.WriteLine($"You have {4 - counter} guesses left");
     }
 }
 
@@ -42,6 +43,18 @@ void Loop()
 
 }
 
+
+void Hint()
+{
+    if (Int32.Parse(response) > Int32.Parse(secretNumber))
+    {
+        Console.WriteLine("Too High!");
+    }
+    else
+    {
+        Console.WriteLine("Too Low");
+    }
+}
 void RandomNumber()
 {
     Random num = new Random();
