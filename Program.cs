@@ -36,14 +36,22 @@ void GuessStatement()
     else
     {
         Console.WriteLine($"You have {difficulty - counter} guesses left");
+        if ((difficulty - counter) == 0)
+            Console.WriteLine($"The Secret Number was {secretNumber}");
     }
 }
 
 void AskQuestion()
 {
-    Console.WriteLine("Can you Guess the Secret Number??? ");
+    Console.WriteLine("Guess a number between 1 and 100???");
     Console.Write("");
     response = Console.ReadLine();
+    int responseInt;
+    var isNumeric = int.TryParse(response, out responseInt);
+    if (!(responseInt > 0 && responseInt <= 100) || (isNumeric == false))
+    {
+        AskQuestion();
+    }
 }
 
 void Loop()
@@ -62,7 +70,6 @@ void UnlimitedLoop()
     AskQuestion();
     while (!(Int32.Parse(response) == Int32.Parse(secretNumber)))
     {
-
         Compare();
     }
 }
@@ -71,7 +78,16 @@ void DifficultyLevel()
 {
     Console.WriteLine("Choose a difficulty level... Easy, Medium , Hard or Cheater");
     string level = Console.ReadLine();
-    if (level.ToLower() == "easy")
+    if (level.ToLower() != "easy"
+    && level.ToLower() != "medium"
+    && level.ToLower() != "hard"
+    && level.ToLower() != "cheater"
+    )
+    {
+        Console.WriteLine("Please choose a difficulty level of Easy, Medium , Hard or Cheater");
+        DifficultyLevel();
+    }
+    else if (level.ToLower() == "easy")
     {
         difficulty = 8;
     }
@@ -94,10 +110,12 @@ void Hint()
     if (Int32.Parse(response) > Int32.Parse(secretNumber))
     {
         Console.WriteLine("Too High!");
+        Console.WriteLine();
     }
     else
     {
         Console.WriteLine("Too Low");
+        Console.WriteLine();
     }
 }
 void RandomNumber()
