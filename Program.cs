@@ -2,7 +2,7 @@
 
 
 string response;
-string secretNumber = "42";
+string secretNumber;
 int counter = 0;
 
 
@@ -20,7 +20,7 @@ void Compare()
     }
     else
     {
-        Console.WriteLine($"Incorrect Guess!({counter})");
+        Console.WriteLine($"Incorrect Guess! You have {4 - counter} guesses left");
     }
 }
 
@@ -42,8 +42,16 @@ void Loop()
 
 }
 
+void RandomNumber()
+{
+    Random num = new Random();
+    int randomNum = num.Next(1, 100);
+    secretNumber = randomNum.ToString();
+}
+
 void GuessingGame()
 {
+    RandomNumber();
     Loop();
 }
 
