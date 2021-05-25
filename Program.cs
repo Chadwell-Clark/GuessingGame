@@ -4,6 +4,7 @@
 string response;
 string secretNumber;
 int counter = 0;
+int difficulty = 0;
 
 
 GuessingGame();
@@ -21,7 +22,7 @@ void Compare()
     else
     {
         Hint();
-        Console.WriteLine($"You have {4 - counter} guesses left");
+        Console.WriteLine($"You have {difficulty - counter} guesses left");
     }
 }
 
@@ -34,7 +35,7 @@ void AskQuestion()
 
 void Loop()
 {
-    for (int i = 1; i <= 4; i++)
+    for (int i = 1; i <= difficulty; i++)
     {
         counter++;
         AskQuestion();
@@ -43,6 +44,23 @@ void Loop()
 
 }
 
+void DifficultyLevel()
+{
+    Console.WriteLine("Choose a difficulty level... Easy, Medium or Hard");
+    string level = Console.ReadLine();
+    if (level.ToLower() == "easy")
+    {
+        difficulty = 8;
+    }
+    else if (level.ToLower() == "medium")
+    {
+        difficulty = 6;
+    }
+    else if (level.ToLower() == "hard")
+    {
+        difficulty = 4;
+    }
+}
 
 void Hint()
 {
@@ -64,6 +82,7 @@ void RandomNumber()
 
 void GuessingGame()
 {
+    DifficultyLevel();
     RandomNumber();
     Loop();
 }
