@@ -22,6 +22,19 @@ void Compare()
     else
     {
         Hint();
+        GuessStatement();
+    }
+}
+
+void GuessStatement()
+{
+    if (difficulty == 0)
+    {
+        Console.WriteLine("You have unlimited guesses left");
+        UnlimitedLoop();
+    }
+    else
+    {
         Console.WriteLine($"You have {difficulty - counter} guesses left");
     }
 }
@@ -44,9 +57,19 @@ void Loop()
 
 }
 
+void UnlimitedLoop()
+{
+    AskQuestion();
+    while (!(Int32.Parse(response) == Int32.Parse(secretNumber)))
+    {
+
+        Compare();
+    }
+}
+
 void DifficultyLevel()
 {
-    Console.WriteLine("Choose a difficulty level... Easy, Medium or Hard");
+    Console.WriteLine("Choose a difficulty level... Easy, Medium , Hard or Cheater");
     string level = Console.ReadLine();
     if (level.ToLower() == "easy")
     {
@@ -59,6 +82,10 @@ void DifficultyLevel()
     else if (level.ToLower() == "hard")
     {
         difficulty = 4;
+    }
+    else if (level.ToLower() == "cheater")
+    {
+        difficulty = 0;
     }
 }
 
@@ -84,6 +111,13 @@ void GuessingGame()
 {
     DifficultyLevel();
     RandomNumber();
-    Loop();
+    if (difficulty == 0)
+    {
+        UnlimitedLoop();
+    }
+    else
+    {
+        Loop();
+    }
 }
 
